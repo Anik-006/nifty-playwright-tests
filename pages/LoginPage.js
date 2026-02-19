@@ -5,6 +5,7 @@ export class LoginPage {
     this.usernameInput = page.locator('#username');
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('button[type="submit"]');
+    this.signinZoom = page.getByText('Sign in with Zoom');
     this.errorMessage = page.getByText('Invalid username or password');
   }
 
