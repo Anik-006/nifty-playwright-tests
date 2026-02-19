@@ -34,11 +34,11 @@ export default defineConfig({
     baseURL: 'http://localhost:5004',
     trace: 'on-first-retry',
   },
-   webServer: {
-    command: 'npm run dev', // command to start your server
-    port: 5004,
-    reuseExistingServer: true, // if server already running, reuse it
-  },
+  //  webServer: {
+  //   command: 'npm run dev', // command to start your server
+  //   port: 5004,
+  //   reuseExistingServer: true, // if server already running, reuse it
+  // },
 
   /* Configure projects for major browsers */
   projects: [
