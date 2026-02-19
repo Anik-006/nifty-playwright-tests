@@ -12,11 +12,11 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
   },
 
-  // Use the frontend server started manually in CI
+  // Only reuse the server started manually in CI
   webServer: {
     url: 'http://localhost:5004',
     reuseExistingServer: true, // key fix
-    timeout: 120_000,
+    timeout: 120_000,          // wait up to 2 min for server to be ready
   },
 
   projects: [
@@ -25,8 +25,15 @@ export default defineConfig({
     { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 
+  /* Run tests in files in parallel */
   fullyParallel: true,
+
+  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
+
+  /* Fail the build on CI if test.only is left in source */
   forbidOnly: !!process.env.CI,
+
+  /* Reporter */
   reporter: [['list'], ['html']],
 });
