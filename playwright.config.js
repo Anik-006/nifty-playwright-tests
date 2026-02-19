@@ -8,7 +8,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npm run dev',       // your dev server start command
+    //command: 'npm run dev',       // your dev server start command
     url: 'http://localhost:5004', // wait until this URL is reachable
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,          // wait up to 2 min for server
