@@ -13,11 +13,18 @@ export default defineConfig({
   },
 
   // Only reuse the server started manually in CI
-  webServer: {
-    url: 'http://localhost:5004',
-    reuseExistingServer: true, // key fix
-    timeout: 120_000,          // wait up to 2 min for server to be ready
-  },
+  webServer: process.env.CI
+  ? {
+      command: 'npm run dev',
+      url: 'http://localhost:5004',
+      timeout: 120_000,
+      reuseExistingServer: false,
+    }
+  : {
+      command: 'npm run dev',
+      url: 'http://localhost:5004',
+      reuseExistingServer: true,
+    },
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
