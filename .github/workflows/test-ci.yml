@@ -1,0 +1,35 @@
+name: Playwright Framework CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  framework-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # 1️⃣ Checkout test repo
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Setup Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Install Playwright browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # 5️⃣ Verify Playwright setup
+      - name: Check Playwright Version
+        run: npx playwright --version
