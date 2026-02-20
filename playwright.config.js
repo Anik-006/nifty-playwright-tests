@@ -21,4 +21,3 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   reporter: [['list'], ['html']],
 });
-//
