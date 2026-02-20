@@ -12,38 +12,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
       - uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Build frontend (if needed)
-      - name: Build frontend
-        run: npm run build
-
-      # 5️⃣ Start frontend server in background and wait until ready
-      - name: Start Frontend Server
-        run: |
-          npm run dev &                          # start server
-          npx wait-on http://localhost:5004 --timeout 120000
-        shell: bash
-
-      # 6️⃣ Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # 7️⃣ Run Playwright tests
       - name: Run Playwright tests
         run: npx playwright test --forbid-only
 
-      # 8️⃣ Upload Playwright report
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
